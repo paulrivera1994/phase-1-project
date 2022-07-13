@@ -1,3 +1,7 @@
+const form = document.getElementById("search-form");
+const card = document.querySelector("#card");
+const container = document.querySelector(".card-container");
+
 //EVENT LISTENERS
 //LOAD CARD CONTAINER AFTER DOM LOAD
 document.addEventListener("DOMContentLoaded", preloadPlayers);
@@ -26,3 +30,8 @@ function renderCard(team, firstName, lastName, stats, conference) {
   closeIcon.src = "./media/xmark-solid.png";
   closeButton.append(closeIcon);
 }
+
+//DELETES WHOLE CARD WHEN ICON IS CLICKED
+closeButton.addEventListener("click", (e) =>
+  console.log(e.target.parentElement.parentElement.remove())
+);
