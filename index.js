@@ -35,3 +35,10 @@ function renderCard(team, firstName, lastName, stats, conference) {
 closeButton.addEventListener("click", (e) =>
   console.log(e.target.parentElement.parentElement.remove())
 );
+
+//Fetch request
+function getPlayerId() {
+  fetch(`hhttps://www.balldontlie.io/api/v1/players?search=${player}`)
+    .then((res) => res.json())
+    .then((data) => json(data));
+}
