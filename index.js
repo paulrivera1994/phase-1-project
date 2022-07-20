@@ -15,11 +15,17 @@ function handleSubmit(e) {
 }
 
 //RENDER CARD
-function renderCard(team, firstName, lastName, stats, conference) {
-  //CREATES A NEW CARD THAT RENDERS AFTER SUBMITTING
-  const newCard = document.createElement("div");
-  newCard.id = "card";
-  container.append(newCard);
+function renderOnePlayer(player) {
+  //Build Player Card
+  let card = document.createElement("li");
+  card.className = "card";
+  card.innerHTML = `
+  <div class="content">
+    <h4>${player.first_name} $${player.last_name}</h4>
+    <p>
+      <span class="position">${player.position}</span>Position Played
+    </p>
+    <p> Points per game:`;
 
   //CREATES A CLOSE BUTTON
   const closeButton = document.createElement("close-btn");
@@ -38,7 +44,19 @@ closeButton.addEventListener("click", (e) =>
 
 //Fetch request
 function getPlayerId() {
-  fetch(`hhttps://www.balldontlie.io/api/v1/players?search=${player}`)
+  fetch(`https://www.balldontlie.io/api/v1/players?search=${player}`)
     .then((res) => res.json())
     .then((data) => json(data));
 }
+
+function getPlayerStats() {
+  fetch(
+    `https://www.balldontlie.io/api/v1/season_averages?season=${season}&${player}`
+  );
+}
+
+//Initial Render
+function initialize() {
+  getPlayerId();
+}
+initialize();
