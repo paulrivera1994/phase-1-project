@@ -1,9 +1,9 @@
 body {
-  background-color: darkblue;
+  background-color: darkred;
   width: 100%;
 }
 .header {
-  margin: 4% auto;
+  margin: 3% auto;
   width: 450px;
 }
 
@@ -19,6 +19,7 @@ footer #signature {
   text-align: center;
   opacity: 50%;
   text-decoration: solid;
+  color: white;
 }
 h1,
 h2 {
@@ -41,5 +42,38 @@ h2 {
 }
 #player {
   font-style: inherit;
-  background-color: whitesmoke;
+  background-color: white;
+}
+.btn {
+  background-color: #1688d4;
+  color: white;
+  padding: 0px 25px;
+  border: none;
+  font-weight: bolder;
+  border-radius: 3px;
+}
+.btn:hover {
+  background-color: #065f9a;
+  cursor: pointer;
+  transition: 100ms;
+}
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  max-width: 75%;
+  justify-content: center;
+}
+#card {
+  background-color: #373a46;
+  width: 400px;
+  height: auto;
+  border-radius: 20px;
+  margin: 25px;
+  padding-bottom: 20px;
+}
+
+#card:hover {
+  background-color: #323541;
+  transition: 300ms;
 }
