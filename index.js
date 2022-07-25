@@ -15,9 +15,10 @@ function handleSubmit(e) {
     player: e.target.player.value,
     //tm: e.target.teams.value,
     team: teams.options[teams.selectedIndex].text,
-    //teamStr: `${e.target.player.value.replace(" ", "-")}-${
-    //  e.target.teams.value
-    //}`.toLowerCase(),
+    seasonAvrg: e.target.player.value,
+    // teamStr: `${e.target.player.value.replace(" ", "-")}-${
+    //   e.target.teams.value
+    // }`.toLowerCase(),
   };
   //getPlayerId(e.target.player.value);
   //getPlayerStats(e.target.player.value);
@@ -171,7 +172,7 @@ function renderPlayerCard(
 // }
 async function getData(players, callback) {
   const player = players.player;
-  const playerId = player.data[0].player_id;
+  const playerId = players.seasonAvrg;
   let playerData, seasonData;
   try {
     playerData = await fetch(
