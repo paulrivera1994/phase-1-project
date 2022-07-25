@@ -18,7 +18,7 @@ footer #signature {
   padding-top: 20px;
   text-align: center;
   opacity: 50%;
-  text-decoration: solid;
+  text-decoration: inherit;
   color: white;
 }
 h1,
@@ -44,15 +44,15 @@ h2 {
   font-style: inherit;
   background-color: white;
 }
-.btn {
+#search-btn {
   background-color: #1688d4;
-  color: white;
+  color: black;
   padding: 0px 25px;
   border: none;
   font-weight: bolder;
   border-radius: 3px;
 }
-.btn:hover {
+#search-btn:hover {
   background-color: #065f9a;
   cursor: pointer;
   transition: 100ms;
@@ -76,4 +76,15 @@ h2 {
 #card:hover {
   background-color: #323541;
   transition: 300ms;
+}
+.card-header {
+  padding: 0px 40px;
+}
+#player {
+  width: 200px;
+  height: 40px;
+  margin-right: 10px;
+  padding-left: 5px;
+  border: none;
+  border-radius: 3px;
 }
