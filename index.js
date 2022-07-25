@@ -169,3 +169,24 @@ function renderPlayerCard(
 //   const player = d.data.slice(-1)["0"]["first_name"];
 //   return updatePlayer;
 // }
+async function getData(players, callback) {
+  const player = players.player;
+  const playerId = player.data[0].player_id;
+  let playerData, seasonData;
+  try {
+    playerData = await fetch(
+      `https://www.balldontlie.io/api/v1/players?search${player}`
+    )
+      .then((res) => res.json())
+      .then((d) => console.log(d));
+    seasonData = await fetch(
+      `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerId}`
+    )
+      .then((res) => res.json())
+      .then((d) => res.json(d));
+  } catch (error) {
+    console.log(error);
+  } finally {
+    callback(players, playerData, seasonData);
+  }
+}
