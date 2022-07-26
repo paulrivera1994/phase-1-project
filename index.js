@@ -166,28 +166,146 @@ function renderPlayerCard(
 //   document.body.append(container);
 // }
 
-function updatePlayer(d) {
-  const player = d.data.slice(-1)["0"]["player_id"];
-  return player;
-}
+// function updatePlayer(d) {
+//   const player = d.data.slice(-1)["0"]["player_id"];
+//   return player;
+// }
 async function getData(players, callback) {
   const player = players.player;
-  //const playerId = player.value;
-  let playerData, seasonData;
+  let playerData,
+    seasonData,
+    pointsData,
+    assistsData,
+    reboundsData,
+    blocksData,
+    heightFdata,
+    heightIdata,
+    positionData;
   try {
     playerData = await fetch(
-      `https://www.balldontlie.io/api/v1/players?search${player}`
+      `https://www.balldontlie.io/api/v1/players?search=${player}`
     )
-      .then((res) => res.json())
-      .then((d) => console.log(d));
+      .then((res) => {
+        const json = res.json();
+        return json;
+      })
+      .then((d) => {
+        return d.data;
+      });
+
+    const playerId = playerData[0].id;
+    console.log("playerId:", playerId);
     seasonData = await fetch(
-      `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${player}`
+      `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerId}`
     )
-      .then((res) => res.json())
-      .then((d) => updatePlayer(d));
+      .then((res) => {
+        const json = res.json();
+        return json;
+      })
+      .then((d) => {
+        return d.data[0];
+      });
+
+    pointsData = await fetch(
+      `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerId}`
+    )
+      .then((res) => {
+        const json = res.json();
+        return json;
+      })
+      .then((d) => {
+        return d.data[0].pts;
+      });
+
+    assistsData = await fetch(
+      `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerId}`
+    )
+      .then((res) => {
+        const json = res.json();
+        return json;
+      })
+      .then((d) => {
+        return d.data[0].ast;
+      });
+
+    reboundsData = await fetch(
+      `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerId}`
+    )
+      .then((res) => {
+        const json = res.json();
+        return json;
+      })
+      .then((d) => {
+        return d.data[0].reb;
+      });
+
+    blocksData = await fetch(
+      `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerId}`
+    )
+      .then((res) => {
+        const json = res.json();
+        return json;
+      })
+      .then((d) => {
+        return d.data[0].blk;
+      });
+
+    heightFdata = await fetch(
+      `https://www.balldontlie.io/api/v1/players?search=${player}`
+    )
+      .then((res) => {
+        const json = res.json();
+        return json;
+      })
+      .then((d) => {
+        return d.data[0].height_feet;
+      });
+
+    heightIdata = await fetch(
+      `https://www.balldontlie.io/api/v1/players?search=${player}`
+    )
+      .then((res) => {
+        const json = res.json();
+        return json;
+      })
+      .then((d) => {
+        return d.data[0].height_inches;
+      });
+
+    postionData = await fetch(
+      `https://www.balldontlie.io/api/v1/players?search=${player}`
+    )
+      .then((res) => {
+        const json = res.json();
+        return json;
+      })
+      .then((d) => {
+        return d.data[0].position;
+      });
   } catch (error) {
     console.log(error);
   } finally {
-    callback(players, playerData, seasonData);
+    console.log("players:", players);
+    console.log("playerData:", playerData);
+    console.log("seasonData:", seasonData);
+    console.log("pointsData:", pointsData);
+    console.log("assistsData:", assistsData);
+    console.log("reboundsData:", reboundsData);
+    console.log("blocksData:", blocksData);
+    console.log("heightFdata:", heightFdata);
+    console.log("heightIdata:", heightIdata);
+    console.log("positionData:", postionData);
+    callback(
+      players,
+      playerData,
+      seasonData,
+      pointsData,
+      assistsData,
+      reboundsData,
+      blocksData,
+      heightFdata,
+      heightIdata,
+      positionData
+    );
   }
 }
