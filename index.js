@@ -297,15 +297,15 @@ async function getData(players, callback) {
     console.log("positionData:", postionData);
     callback(
       players,
-      playerData,
-      seasonData,
+      //playerData,
+      //seasonData,
+      positionData,
+      heightFdata,
+      heightIdata,
       pointsData,
       assistsData,
       reboundsData,
-      blocksData,
-      heightFdata,
-      heightIdata,
-      positionData
+      blocksData
     );
   }
 }
