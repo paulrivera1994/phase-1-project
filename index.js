@@ -15,7 +15,7 @@ function handleSubmit(e) {
     player: e.target.player.value,
     //tm: e.target.teams.value,
     team: teams.options[teams.selectedIndex].text,
-    seasonAvrg: e.target.player.value,
+    //seasonAvrg: player.value,
     // teamStr: `${e.target.player.value.replace(" ", "-")}-${
     //   e.target.teams.value
     // }`.toLowerCase(),
@@ -166,13 +166,13 @@ function renderPlayerCard(
 //   document.body.append(container);
 // }
 
-// function updatePlayer(d) {
-//   const player = d.data.slice(-1)["0"]["first_name"];
-//   return updatePlayer;
-// }
+function updatePlayer(d) {
+  const player = d.data.slice(-1)["0"]["player_id"];
+  return player;
+}
 async function getData(players, callback) {
   const player = players.player;
-  const playerId = players.seasonAvrg;
+  //const playerId = player.value;
   let playerData, seasonData;
   try {
     playerData = await fetch(
@@ -181,10 +181,10 @@ async function getData(players, callback) {
       .then((res) => res.json())
       .then((d) => console.log(d));
     seasonData = await fetch(
-      `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerId}`
+      `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${player}`
     )
       .then((res) => res.json())
-      .then((d) => res.json(d));
+      .then((d) => updatePlayer(d));
   } catch (error) {
     console.log(error);
   } finally {
