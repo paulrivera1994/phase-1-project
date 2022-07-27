@@ -3,11 +3,10 @@ const card = document.querySelector("#card");
 const container = document.querySelector(".card-container");
 const player = document.getElementById("player");
 const teams = document.getElementById("teams");
-//const searchButton = document.getElementsByClassName("btn");
-//const search = document.querySelector("input#search");
+
 //EVENT LISTENERS
 //LOAD CARD CONTAINER AFTER DOM LOAD
-//document.addEventListener("DOMContentLoaded", preloadPlayers);
+document.addEventListener("DOMContentLoaded", preLoadPlayers);
 form.addEventListener("submit", handleSubmit);
 function handleSubmit(e) {
   e.preventDefault();
@@ -238,4 +237,26 @@ async function getData(players, callback) {
       blocksData
     );
   }
+}
+
+//Pre-loaded Players
+const randomPlayers = [
+  ["Lebron James", "Los Angeles Lakers"],
+  ["Stephen Curry", "Golden State Warriors"],
+  ["Luka Doncic", "Dallas Mavericks"],
+];
+
+function preLoadPlayer(player, team) {
+  let preLoadedPlayer = {
+    player: player.toString(),
+    team: team.toString(),
+  };
+
+  //Render Card to Page
+  getData(preLoadedPlayer, renderPlayerCard);
+}
+function preLoadPlayers() {
+  randomPlayers.forEach((player) =>
+    preLoadPlayer(player[0], player[1], player[2])
+  );
 }
