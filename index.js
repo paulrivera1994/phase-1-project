@@ -15,13 +15,7 @@ function handleSubmit(e) {
     player: e.target.player.value,
     //tm: e.target.teams.value,
     team: teams.options[teams.selectedIndex].text,
-    //seasonAvrg: player.value,
-    // teamStr: `${e.target.player.value.replace(" ", "-")}-${
-    //   e.target.teams.value
-    // }`.toLowerCase(),
   };
-  //getPlayerId(e.target.player.value);
-  //getPlayerStats(e.target.player.value);
   //RENDERS CARD TO PAGE
   getData(newPlayerObj, renderPlayerCard);
   //FORM RESET
@@ -46,10 +40,10 @@ function renderPlayerCard(
   const closeButton = document.createElement("div");
   closeButton.className = "close-btn";
   newCard.append(closeButton);
+
   const closeIcon = document.createElement("img");
   closeIcon.className = "icon";
-  closeIcon.textContent = "X";
-  //closeIcon.src = "https://www.svgimages.com/jpg/x-icon.html";
+  closeIcon.src = "./src/x-symbol.png";
   closeButton.append(closeIcon);
   //DELETES WHOLE CARD WHEN ICON IS CLICKED
   closeButton.addEventListener("click", (e) =>
@@ -102,74 +96,13 @@ function renderPlayerCard(
 
   pointsP.innerHTML = `Points Per Game: <span class='data'>${points}</span>`;
 
-  assistsP.innerHTML = `Assists Per Game: <span class='data>${assists}</span>`;
+  assistsP.innerHTML = `Assists Per Game: <span class='data'>${assists}</span>`;
 
   reboundsP.innerHTML = `Rebounds Per Game: <span class='data'>${rebounds}</span>`;
 
   blocksP.innerHTML = `Blocks Per Game: <span class='data'>${blocks}</span>`;
 }
-//Fetch requests
-// getPlayerId();
-// function getPlayerId() {
-//   let search = document.querySelector("input#player");
-//   fetch(`https://www.balldontlie.io/api/v1/players?search=${search.value}`)
-//     .then((res) => res.json())
-//     .then((stat) => {
-//       const card = document.getElementById("card");
-//       const name = document.createElement("h3");
-//       const heightFeet = document.createElement("p");
-//       const heightInc = document.createElement("p");
-//       const position = document.createElement("p");
-//       const team = document.createElement("p");
-//console.log(stat);
-//       name.textContent = stat.data[0].first_name + " " + stat.data[0].last_name;
-//       heightFeet.textContent = `Height Feet: ${stat.data[0].height_feet}`;
-//       heightInc.textContent = `Height Inches: ${stat.data[0].height_inches}`;
-//       position.textContent = `Position: ${stat.data[0].position}`;
-//       team.textContent = `Team: ${stat.data[0].team.full_name}`;
-//       card.append(name);
-//       card.append(heightFeet);
-//       card.append(heightInc);
-//       card.append(position);
-//       card.append(team);
-//     });
-// }
-// getPlayerStats();
-// function getPlayerStats(playerId = 237) {
-//   fetch(
-//     `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerId}`
-//   )
-//     .then((res) => res.json())
-//     .then((stats) => {
-//       const card = document.getElementById("card");
-//       const pts = document.createElement("p");
-//       const ast = document.createElement("p");
-//       const reb = document.createElement("p");
-//       const blk = document.createElement("p");
-//console.log(stats.data[0]);
-//       pts.textContent = `Points per game: ${stats.data[0].pts}`;
-//       ast.textContent = `Assists per game: ${stats.data[0].ast}`;
-//       reb.textContent = `Rebounds per game: ${stats.data[0].reb}`;
-//       blk.textContent = `Blocks per game: ${stats.data[0].blk}`;
-//       card.append(pts);
-//       card.append(ast);
-//       card.append(reb);
-//       card.append(blk);
-//     });
-// }
 
-// newCard();
-// function newCard() {
-//   const newCard = document.createElement("div");
-//   newCard.id = "card";
-//   container.append(newCard);
-//   document.body.append(container);
-// }
-
-// function updatePlayer(d) {
-//   const player = d.data.slice(-1)["0"]["player_id"];
-//   return player;
-// }
 async function getData(players, callback) {
   const player = players.player;
   let playerData,
@@ -271,8 +204,7 @@ async function getData(players, callback) {
       .then((d) => {
         return d.data[0].height_inches;
       });
-
-    postionData = await fetch(
+    positionData = await fetch(
       `https://www.balldontlie.io/api/v1/players?search=${player}`
     )
       .then((res) => {
@@ -294,11 +226,9 @@ async function getData(players, callback) {
     console.log("blocksData:", blocksData);
     console.log("heightFdata:", heightFdata);
     console.log("heightIdata:", heightIdata);
-    console.log("positionData:", postionData);
+    console.log("positionData:", positionData);
     callback(
       players,
-      //playerData,
-      //seasonData,
       positionData,
       heightFdata,
       heightIdata,
