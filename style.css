@@ -1,6 +1,6 @@
 body {
-  background-color: darkred;
   width: 100%;
+  background-image: linear-gradient(to right, #870000, #190a05);
 }
 .header {
   margin: 3% auto;
@@ -77,7 +77,7 @@ span.data {
   background-color: white;
 }
 #search-btn {
-  background-color: #1688d4;
+  background-color: grey;
   color: black;
   padding: 0px 25px;
   border: none;
@@ -97,7 +97,7 @@ span.data {
   justify-content: center;
 }
 #card {
-  background-color: darkblue;
+  background-image: linear-gradient(to right, #141e30, #243b55);
   width: 400px;
   height: auto;
   border-radius: 20px;
@@ -134,4 +134,10 @@ span.data {
   border-radius: 10px;
   cursor: pointer;
   transition: 250ms;
+}
+hr {
+  border-color: #1688d4;
+  margin: 25px auto;
+  width: 80%;
+  display: flex;
 }
