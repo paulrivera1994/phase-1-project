@@ -248,8 +248,8 @@ const randomPlayers = [
 
 function preLoadPlayer(player, team) {
   let preLoadedPlayer = {
-    player: player.toString(),
-    team: team.toString(),
+    player: player,
+    team: team,
   };
 
   //Render Card to Page
