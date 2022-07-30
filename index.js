@@ -12,7 +12,6 @@ function handleSubmit(e) {
   e.preventDefault();
   let newPlayerObj = {
     player: e.target.player.value,
-    //tm: e.target.teams.value,
     team: teams.options[teams.selectedIndex].text,
   };
   //RENDERS CARD TO PAGE
@@ -35,6 +34,7 @@ function renderPlayerCard(
   const newCard = document.createElement("div");
   newCard.id = "card";
   container.append(newCard);
+
   //CREATES A CLOSE BUTTON
   const closeButton = document.createElement("div");
   closeButton.className = "close-btn";
@@ -44,6 +44,7 @@ function renderPlayerCard(
   closeIcon.className = "icon";
   closeIcon.src = "./src/x-symbol.png";
   closeButton.append(closeIcon);
+
   //DELETES WHOLE CARD WHEN ICON IS CLICKED
   closeButton.addEventListener("click", (e) =>
     console.log(e.target.parentElement.parentElement.remove())
@@ -61,6 +62,7 @@ function renderPlayerCard(
   cardHeader.append(h4);
 
   newCard.append(cardHeader);
+
   //Seperation Line
   const hr = document.createElement("hr");
   newCard.append(hr);
@@ -105,7 +107,6 @@ function renderPlayerCard(
 async function getData(players, callback) {
   const player = players.player;
   let playerData,
-    seasonData,
     pointsData,
     assistsData,
     reboundsData,
@@ -216,16 +217,16 @@ async function getData(players, callback) {
   } catch (error) {
     console.log(error);
   } finally {
-    console.log("players:", players);
-    console.log("playerData:", playerData);
-    console.log("seasonData:", seasonData);
-    console.log("pointsData:", pointsData);
-    console.log("assistsData:", assistsData);
-    console.log("reboundsData:", reboundsData);
-    console.log("blocksData:", blocksData);
-    console.log("heightFdata:", heightFdata);
-    console.log("heightIdata:", heightIdata);
-    console.log("positionData:", positionData);
+    // console.log("players:", players);
+    // console.log("playerData:", playerData);
+    // console.log("seasonData:", seasonData);
+    // console.log("pointsData:", pointsData);
+    // console.log("assistsData:", assistsData);
+    // console.log("reboundsData:", reboundsData);
+    // console.log("blocksData:", blocksData);
+    // console.log("heightFdata:", heightFdata);
+    // console.log("heightIdata:", heightIdata);
+    // console.log("positionData:", positionData);
     callback(
       players,
       positionData,
