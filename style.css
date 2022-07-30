@@ -77,7 +77,7 @@ span.data {
   background-color: white;
 }
 #search-btn {
-  background-color: grey;
+  background-color: #1e90ff;
   color: black;
   padding: 0px 25px;
   border: none;
@@ -85,7 +85,6 @@ span.data {
   border-radius: 3px;
 }
 #search-btn:hover {
-  background-color: #065f9a;
   cursor: pointer;
   transition: 100ms;
 }
