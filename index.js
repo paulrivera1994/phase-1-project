@@ -106,14 +106,7 @@ function renderPlayerCard(
 
 async function getData(players, callback) {
   const player = players.player;
-  let playerData,
-    pointsData,
-    assistsData,
-    reboundsData,
-    blocksData,
-    heightFdata,
-    heightIdata,
-    positionData;
+  let playerData, seasonData;
   try {
     playerData = await fetch(
       `https://www.balldontlie.io/api/v1/players?search=${player}`
@@ -138,114 +131,21 @@ async function getData(players, callback) {
       .then((d) => {
         return d.data[0];
       });
-
-    pointsData = await fetch(
-      `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerId}`
-    )
-      .then((res) => {
-        const json = res.json();
-        return json;
-      })
-      .then((d) => {
-        return d.data[0].pts;
-      });
-
-    assistsData = await fetch(
-      `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerId}`
-    )
-      .then((res) => {
-        const json = res.json();
-        return json;
-      })
-      .then((d) => {
-        return d.data[0].ast;
-      });
-
-    reboundsData = await fetch(
-      `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerId}`
-    )
-      .then((res) => {
-        const json = res.json();
-        return json;
-      })
-      .then((d) => {
-        return d.data[0].reb;
-      });
-
-    blocksData = await fetch(
-      `https://www.balldontlie.io/api/v1/season_averages?season=2019&player_ids[]=${playerId}`
-    )
-      .then((res) => {
-        const json = res.json();
-        return json;
-      })
-      .then((d) => {
-        return d.data[0].blk;
-      });
-
-    heightFdata = await fetch(
-      `https://www.balldontlie.io/api/v1/players?search=${player}`
-    )
-      .then((res) => {
-        const json = res.json();
-        return json;
-      })
-      .then((d) => {
-        return d.data[0].height_feet;
-      });
-
-    heightIdata = await fetch(
-      `https://www.balldontlie.io/api/v1/players?search=${player}`
-    )
-      .then((res) => {
-        const json = res.json();
-        return json;
-      })
-      .then((d) => {
-        return d.data[0].height_inches;
-      });
-    positionData = await fetch(
-      `https://www.balldontlie.io/api/v1/players?search=${player}`
-    )
-      .then((res) => {
-        const json = res.json();
-        return json;
-      })
-      .then((d) => {
-        return d.data[0].position;
-      });
   } catch (error) {
     console.log(error);
   } finally {
-    // console.log("players:", players);
-    // console.log("playerData:", playerData);
-    // console.log("seasonData:", seasonData);
-    // console.log("pointsData:", pointsData);
-    // console.log("assistsData:", assistsData);
-    // console.log("reboundsData:", reboundsData);
-    // console.log("blocksData:", blocksData);
-    // console.log("heightFdata:", heightFdata);
-    // console.log("heightIdata:", heightIdata);
-    // console.log("positionData:", positionData);
     callback(
       players,
-      positionData,
-      heightFdata,
-      heightIdata,
-      pointsData,
-      assistsData,
-      reboundsData,
-      blocksData
+      playerData[0].position,
+      playerData[0].height_feet,
+      playerData[0].height_inches,
+      seasonData.pts,
+      seasonData.ast,
+      seasonData.reb,
+      seasonData.blk
     );
   }
 }
-
-//Pre-loaded Players
-const randomPlayers = [
-  ["Lebron James", "Los Angeles Lakers"],
-  ["Stephen Curry", "Golden State Warriors"],
-  ["Luka Doncic", "Dallas Mavericks"],
-];
 
 function preLoadPlayer(player, team) {
   let preLoadedPlayer = {
@@ -256,6 +156,12 @@ function preLoadPlayer(player, team) {
   //Render Card to Page
   getData(preLoadedPlayer, renderPlayerCard);
 }
+//Pre-loaded Players
+const randomPlayers = [
+  ["Lebron James", "Los Angeles Lakers"],
+  ["Stephen Curry", "Golden State Warriors"],
+  ["Luka Doncic", "Dallas Mavericks"],
+];
 function preLoadPlayers() {
   randomPlayers.forEach((player) =>
     preLoadPlayer(player[0], player[1], player[2])
